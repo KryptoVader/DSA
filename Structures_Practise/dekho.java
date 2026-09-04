@@ -1,3 +1,5 @@
+import LL.LinkedList;
+
 public class dekho {
 public static void main(String[] args) throws CloneNotSupportedException {
         LinkedList<Integer> ll = new LinkedList<>();
