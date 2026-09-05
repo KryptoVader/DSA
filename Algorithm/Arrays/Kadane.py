@@ -20,6 +20,7 @@ def kadane(arr):
                 best = res.copy()
                 maxSum = curSum
     return maxSum, best 
+
 print(kadane([-2, 3, -1, 5, -6]))
 print(kadane([4, -1, 2, 1, -20]))
 print(kadane([-5, -2, -8, -1]))
