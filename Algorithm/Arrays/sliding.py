@@ -1,6 +1,3 @@
-def cus(og, i,o):
-    return og + i - o;
-
 def max_sum_subarray(arr, k):
     s = sum(arr[:k])
     max_sum = s
