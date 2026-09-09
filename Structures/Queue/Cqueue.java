@@ -5,10 +5,10 @@ public class Cqueue<T>{
     private int size, front, rear, count;
 
     public Cqueue(int size){
-        this.size = size;
-        this.arr = (T[]) new Object[size];
+        this.size  = size;
+        this.arr   = (T[]) new Object[size];
         this.front = 0;
-        this.rear = 0;
+        this.rear  = 0;
         this.count = 0;
     }
 
