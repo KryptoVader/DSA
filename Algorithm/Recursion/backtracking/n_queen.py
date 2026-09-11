@@ -23,14 +23,11 @@ def safe(arr, r,c):
                 r -= 1
                 c -= 1
             return True
-
-
         return upper_left(r,c,arr) and upper_right(r,c,arr)
     return safe_col(r,c,arr) and safe_diag(r,c,arr)
 
 def solve(board, row):
     N = len(board)
-
     if row == N:
         print(board)
         return 
@@ -40,6 +37,6 @@ def solve(board, row):
             board[row][col] = 1
             solve(board, row+1)
             board[row][col] = 0
-
+            
 board = [[0 for _ in range(4)] for _ in range(4)]
 solve(board, 0)
