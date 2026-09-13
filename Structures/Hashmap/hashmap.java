@@ -1,5 +1,9 @@
 package Hashmap;
 
+import java.util.HashSet;
+
+import Hashset.hashset;
+
 @SuppressWarnings("unchecked")
 public class hashmap<K,T>{
     private static class Node<K,T>{
@@ -38,11 +42,15 @@ public class hashmap<K,T>{
     private int size;
     private double loadFactor, threshold;
 
-    public hashmap(){
-        this.buckets = (Node<K,T>[]) new Node[9];
+    public hashmap(int size){
+        this.buckets = (Node<K,T>[]) new Node[size];
         this.size = 0;
         this.loadFactor = 0.75;
         this.threshold = this.loadFactor * this.buckets.length;
+    }
+
+    public int size(){
+        return this.size;
     }
 
     public void put(K key, T value){
@@ -192,5 +200,62 @@ public class hashmap<K,T>{
         }
         sb.append("}");
         return sb.toString();
+    }
+
+    public hashset<K> keySet(){
+        hashset<K> keys = new hashset<K>(this.size);
+        for(int i = 0; i < this.buckets.length; i++){
+            var ptr = this.buckets[i];
+            if(ptr == null){
+                continue;
+            }
+
+            while(ptr != null){
+                keys.add(ptr.getKey());
+                ptr = ptr.getNext();
+            }
+        }
+
+        return keys;
+    }
+
+    public static void main(String[] args) {
+        hashmap<String, Integer> map = new hashmap<>(9);
+
+        // Basic insert
+        map.put("A", 10);
+        map.put("B", 20);
+        map.put("C", 30);
+
+        System.out.println("Map: " + map);
+        System.out.println("Keys: " + map.keySet());
+
+        // Update existing key
+        map.put("B", 999);
+
+        System.out.println("\nAfter updating B:");
+        System.out.println("Map: " + map);
+        System.out.println("Keys: " + map.keySet());
+
+        // Remove
+        map.remove("A");
+
+        System.out.println("\nAfter removing A:");
+        System.out.println("Map: " + map);
+        System.out.println("Keys: " + map.keySet());
+
+        // Trigger resize
+        map.put("D", 40);
+        map.put("E", 50);
+        map.put("F", 60);
+        map.put("G", 70);
+
+        System.out.println("\nAfter resize:");
+        System.out.println("Map: " + map);
+        System.out.println("Keys: " + map.keySet());
+
+        // Verify size == number of keys
+        System.out.println("\nSize: " + map.size());
+        System.out.println("Number of keys: " + map.keySet().size());
     }
 }

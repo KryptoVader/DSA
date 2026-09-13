@@ -113,6 +113,10 @@ public class hashset<T>{
         this.threshold = this.loadFactor * arr.length;
     }
 
+    public int size(){
+        return this.size;
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder("{");
         boolean first = true;
