@@ -14,6 +14,13 @@ public class DynamicList<T extends Object> implements Cloneable, Iterable<T>{
     }
 
     @SuppressWarnings("unchecked")
+    public DynamicList(T[] arr) {
+        this.arr = (T[]) new Object[arr.length];
+        System.arraycopy(arr, 0, this.arr, 0, arr.length);
+        this.ele = arr.length;
+    }
+
+    @SuppressWarnings("unchecked")
     public DynamicList(int capacity){
         if (capacity < 0) {
             throw new IllegalArgumentException("Capacity cannot be negative");
@@ -197,6 +204,12 @@ public class DynamicList<T extends Object> implements Cloneable, Iterable<T>{
             n.add(this.arr[i]);
         }
         return n;
+    }
+
+    public void swap(int i, int j){
+        T temp = this.arr[j];
+        this.arr[j] = this.arr[i];
+        this.arr[i] = temp;
     }
 
     /**
