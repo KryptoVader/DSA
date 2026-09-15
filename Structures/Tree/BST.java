@@ -189,12 +189,80 @@ public class BST<T extends Comparable<T>>{
 
     private void Level(Node<T> root){
         ArrayDeque<Node<T>> q = new ArrayDeque<>();
-        q.add(root);
+        q.addFirst(root);
+        Node<T> ptr = root;
         while(!q.isEmpty()){
-            var ptr = q.getFirst();
+            ptr = q.removeFirst();
             System.out.print(ptr.getData() + " ");
-            q.addLast(ptr.getLeft());
-            q.addLast(ptr.getRight());
+            if(ptr.getLeft() != null)
+                q.addLast(ptr.getLeft());
+            if(ptr.getRight() != null)
+                q.addLast(ptr.getRight());
+        }
+    }
+
+    public void remove(T data) {
+        if (data == null) {
+            System.err.println("Invalid");
+            return;
+        }
+
+        var curr = this.root;
+        Node<T> par = null;
+
+        while (curr != null) {
+            int cmp = data.compareTo(curr.getData());
+            if (cmp == 0) {
+                break;
+            }
+            else if (cmp < 0) {
+                par = curr;
+                curr = curr.getLeft();
+            }
+            else {
+                par = curr;
+                curr = curr.getRight();
+            }
+        }
+
+        if (curr == null) {
+            return;
+        }
+
+        if (curr.getLeft() != null && curr.getRight() != null) {
+            var successor = curr.getRight();
+            Node<T> successorPar = curr;
+
+            while(successor.getLeft() != null){
+                successorPar = successor;
+                successor = successor.getLeft();
+            }
+
+            Node<T> replacement = successor.getRight();
+
+            if(successorPar.getLeft() == successor){
+                successorPar.setLeft(replacement);
+            }
+            else{
+                successorPar.setRight(replacement);
+            }
+
+            curr.setData(successor.getData());
+            return;
+        }
+
+        Node<T> replacement = curr.getLeft() != null ? curr.getLeft() : curr.getRight();
+
+        if (par == null) {
+            this.root = replacement;
+        }
+    
+        else if (par.getLeft() == curr) {
+            par.setLeft(replacement);
+        }
+
+        else {
+            par.setRight(replacement);
         }
     }
 
@@ -202,9 +270,47 @@ public class BST<T extends Comparable<T>>{
         BST<Integer> b = new BST<>();
         int[] arr = {8, 3, 10, 1, 6, 14, 4, 7, 13};
 
-        for(int ele: arr){
+        for (int ele : arr) {
             b.insert(ele);
         }
+
+        System.out.println("Original:");
         b.Level();
+        System.out.println();
+
+        b.remove(1);
+        System.out.println("After removing 1:");
+        b.Level();
+        System.out.println();
+
+        b = new BST<>();
+        for (int ele : arr) {
+            b.insert(ele);
+        }
+
+        b.remove(14);
+        System.out.println("After removing 14:");
+        b.Level();
+        System.out.println();
+
+        b = new BST<>();
+        for (int ele : arr) {
+            b.insert(ele);
+        }
+
+        b.remove(3);
+        System.out.println("After removing 3:");
+        b.Level();
+        System.out.println();
+
+        b = new BST<>();
+        for (int ele : arr) {
+            b.insert(ele);
+        }
+
+        b.remove(8);
+        System.out.println("After removing 8:");
+        b.Level();
+        System.out.println();
     }
 }
