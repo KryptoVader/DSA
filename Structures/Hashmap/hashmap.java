@@ -1,7 +1,5 @@
 package Hashmap;
 
-import java.util.HashSet;
-
 import Hashset.hashset;
 
 @SuppressWarnings("unchecked")
@@ -153,6 +151,26 @@ public class hashmap<K,T>{
 
         System.err.println("Key not found!");
         return;
+    }
+
+    public boolean containsKey(K key) {
+        if (key == null) {
+            return false;
+        }
+
+        var hash = key.hashCode();
+        var idx = Math.floorMod(hash, buckets.length);
+
+        Node<K, T> ptr = buckets[idx];
+
+        while (ptr != null) {
+            if (ptr.getKey().equals(key)) {
+                return true;
+            }
+            ptr = ptr.getNext();
+        }
+
+        return false;
     }
 
     public void resize(){
