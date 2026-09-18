@@ -5,82 +5,92 @@ import List.DynamicList;
 
 public class graph<T> {
 
-    private hashmap<T, DynamicList<T>> v;
-    private int edgeCount;
+    private hashmap<T, DynamicList<T>> vertices;
+    private int edges;
 
     public graph() {
-        v = new hashmap<>(0);
-        edgeCount = 0;
+        vertices = new hashmap<>(8);
+        edges = 0;
     }
 
     public void addVertex(T data) {
-        if (data == null || v.containsKey(data)) {
+        if (data == null || vertices.containsKey(data)) {
             return;
         }
 
-        v.put(data, new DynamicList<>());
+        vertices.put(data, new DynamicList<>());
     }
 
-    public void addEdge(T u, T w) {
-        if (u == null || w == null) {
+    public void addEdge(T u, T v) {
+
+        if (u == null || v == null) {
             return;
         }
 
-        if (!v.containsKey(u) || !v.containsKey(w)) {
+        if (!vertices.containsKey(u) || !vertices.containsKey(v)) {
             return;
         }
 
-        DynamicList<T> uList = v.get(u);
-        DynamicList<T> wList = v.get(w);
+        DynamicList<T> uNeighbours = vertices.get(u);
+        DynamicList<T> vNeighbours = vertices.get(v);
 
-        if (!uList.contains(w)) {
-            uList.add(w);
-            wList.add(u);
-            edgeCount++;
+        if (uNeighbours.contains(v)) {
+            return;
         }
+
+        uNeighbours.add(v);
+        vNeighbours.add(u);
+
+        edges++;
     }
 
-    public void removeEdge(T u, T w) {
-        if (!v.containsKey(u) || !v.containsKey(w)) {
+    public void removeEdge(T u, T v) {
+
+        if (!vertices.containsKey(u) || !vertices.containsKey(v)) {
             return;
         }
 
-        DynamicList<T> uList = v.get(u);
-        DynamicList<T> wList = v.get(w);
+        DynamicList<T> uNeighbours = vertices.get(u);
+        DynamicList<T> vNeighbours = vertices.get(v);
 
-        if (uList.contains(w)) {
-            uList.remove(w);
-            wList.remove(u);
-            edgeCount--;
+        if (!uNeighbours.contains(v)) {
+            return;
         }
+
+        uNeighbours.remove(v);
+        vNeighbours.remove(u);
+
+        edges--;
     }
 
-    public boolean hasEdge(T u, T w) {
-        if (!v.containsKey(u) || !v.containsKey(w)) {
+    public boolean hasEdge(T u, T v) {
+
+        if (!vertices.containsKey(u) || !vertices.containsKey(v)) {
             return false;
         }
 
-        return v.get(u).contains(w);
+        return vertices.get(u).contains(v);
     }
 
     public int vertexCount() {
-        return v.size();
+        return vertices.size();
     }
 
     public int edgeCount() {
-        return edgeCount;
+        return edges;
     }
 
     public DynamicList<T> neighbours(T vertex) {
-        if (!v.containsKey(vertex)) {
+
+        if (!vertices.containsKey(vertex)) {
             return null;
         }
 
-        return v.get(vertex);
+        return vertices.get(vertex);
     }
 
     @Override
     public String toString() {
-        return v.toString();
+        return vertices.toString();
     }
 }
