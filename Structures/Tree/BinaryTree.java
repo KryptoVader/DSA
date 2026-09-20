@@ -14,10 +14,6 @@ public class BinaryTree<T> {
             this.right = null;
         }
 
-        public void setData(T data) {
-            this.data = data;
-        }
-
         public void setLeft(Node<T> n) {
             this.left = n;
         }
@@ -165,19 +161,5 @@ public class BinaryTree<T> {
             }
         }
         return res;
-    }
-
-    public static void main(String[] args) {
-        BinaryTree<Integer> bt = new BinaryTree<>();
-        bt.insert(10);
-        bt.insert(50);
-        bt.insert(5);
-        bt.insert(30);
-        bt.insert(1);
-        bt.insert(99);
-        System.out.println(bt);
-        System.out.println(bt.height());
-        System.out.println(bt.count());
-        System.out.println(bt.leafCount());
     }
 }
