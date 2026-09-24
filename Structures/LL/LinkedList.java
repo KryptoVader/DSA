@@ -380,10 +380,17 @@ public class LinkedList<T> implements Cloneable, Iterable<T>{
             return;
         }
 
-        if(currX == prevY){
+        if(currX == prevY ){
             prevX.next = currY;
             currX.next = currY.next;
             currY.next = currX;
+            return;
+        }
+
+        else if(currY == prevX){
+            prevY.next = currX;
+            currY.next = currX.next;
+            currX.next = currY;
             return;
         }
 
@@ -440,70 +447,5 @@ public class LinkedList<T> implements Cloneable, Iterable<T>{
             this.cursor--;
             canRemove = false;
         }
-    }
-
-    public static void main(String[] args) {
-
-        // Test 1: Swap head and tail
-        LinkedList<Integer> ll1 = new LinkedList<>();
-        ll1.fromArray(new Integer[]{10, 20, 30, 40});
-
-        System.out.println("Original: " + ll1);
-        ll1.swapNodes(40, 10);
-        System.out.println("Swap 40, 10: " + ll1);
-        System.out.println("Expected: [40, 20, 30, 10]\n");
-
-
-        // Test 2: Swap adjacent nodes
-        LinkedList<Integer> ll2 = new LinkedList<>();
-        ll2.fromArray(new Integer[]{10, 20, 30, 40});
-
-        ll2.swapNodes(20, 30);
-        System.out.println("Swap 20, 30: " + ll2);
-        System.out.println("Expected: [10, 30, 20, 40]\n");
-
-
-        // Test 3: Swap non-adjacent nodes
-        LinkedList<Integer> ll3 = new LinkedList<>();
-        ll3.fromArray(new Integer[]{10, 20, 30, 40});
-
-        ll3.swapNodes(20, 40);
-        System.out.println("Swap 20, 40: " + ll3);
-        System.out.println("Expected: [10, 40, 30, 20]\n");
-
-
-        // Test 4: Swap first two nodes
-        LinkedList<Integer> ll4 = new LinkedList<>();
-        ll4.fromArray(new Integer[]{10, 20, 30, 40});
-
-        ll4.swapNodes(10, 20);
-        System.out.println("Swap 10, 20: " + ll4);
-        System.out.println("Expected: [20, 10, 30, 40]\n");
-
-
-        // Test 5: Same value
-        LinkedList<Integer> ll5 = new LinkedList<>();
-        ll5.fromArray(new Integer[]{10, 20, 30, 40});
-
-        ll5.swapNodes(20, 20);
-        System.out.println("Swap 20, 20: " + ll5);
-        System.out.println("Expected: [10, 20, 30, 40]\n");
-
-
-        // Test 6: Missing value
-        LinkedList<Integer> ll6 = new LinkedList<>();
-        ll6.fromArray(new Integer[]{10, 20, 30, 40});
-
-        ll6.swapNodes(20, 99);
-        System.out.println("Swap 20, 99: " + ll6);
-        System.out.println("Expected: [10, 20, 30, 40]\n");
-
-
-        // Test 7: Empty list
-        LinkedList<Integer> ll7 = new LinkedList<>();
-
-        ll7.swapNodes(10, 20);
-        System.out.println("Empty list: " + ll7);
-        System.out.println("Expected: []");
     }
 }
