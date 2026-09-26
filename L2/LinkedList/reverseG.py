@@ -4,7 +4,7 @@ def reverse_group(head):
 
     slow = head
     fast = head.next
-    prev = None
+    prev = None # To help me fix the previous link
 
     while slow and slow.next:
         slow_temp = slow
