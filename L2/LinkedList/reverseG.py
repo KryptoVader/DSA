@@ -10,7 +10,7 @@ def reverse_group(head):
         slow_temp = slow
         fast_temp = fast
 
-        slow = fast.next if fast.next else None
+        slow = fast.next if fast.next else None # Pointer check
         fast = fast.next.next if slow and fast.next.next else None
 
         if prev:
