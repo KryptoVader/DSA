@@ -1,7 +1,3 @@
-class Node:
-    def __init__(self, x):
-        self.next = None
-        self.data = x
 
 def intersection(head1, head2):
     h1 = head1
