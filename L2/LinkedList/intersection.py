@@ -1,4 +1,3 @@
-
 def intersection(head1, head2):
     h1 = head1
     h2 = head2

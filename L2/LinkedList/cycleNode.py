@@ -1,8 +1,3 @@
-class Node:
-    def __init__(self, x):
-        self.next = None
-        self.data = x
-
 def cycleNode(head):
     def cycle(head):
         if head is None or head.next is None:
@@ -17,7 +12,6 @@ def cycleNode(head):
 
             if slow is fast:
                 return slow
-
 
         return False
 
