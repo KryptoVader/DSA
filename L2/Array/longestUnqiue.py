@@ -11,5 +11,7 @@ def longestUnique(arr):
             if seen[arr[i]] >= left:
                 left = seen[arr[i]] + 1
             seen[arr[i]] = i
+
         res = max(res, i - left + 1)
+        
     return res
