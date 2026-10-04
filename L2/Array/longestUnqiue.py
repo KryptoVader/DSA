@@ -12,6 +12,6 @@ def longestUnique(arr):
                 left = seen[arr[i]] + 1
             seen[arr[i]] = i
 
-        res = max(res, i - left + 1)
+        res = max(res, i - left + 1) # Update logic to get answer of getting max len unique subarray
         
     return res
