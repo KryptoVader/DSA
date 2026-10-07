@@ -4,7 +4,7 @@ def splitArray(arr, m):
     res = float('inf')
 
     while L <= R:
-        mid  = (L + R) // 2
+        mid  = (L + R) // 2 ## Binary Search
         sub = 1
         tot = 0
         for ele in arr:
