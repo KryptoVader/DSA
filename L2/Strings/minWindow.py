@@ -1,4 +1,3 @@
-
 def minWindow(s, t):
     if not s or not t or len(s) < len(t):
         return ""
