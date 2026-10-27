@@ -6,7 +6,7 @@ def lengthOfLongestSubstring(s):
     res = 0
     left = 0 
     for char in s:
-        while char in window and left < len(s):
+        while char in window and left < len(s): ## Using the condition to update and maintain the window
             window.remove(s[left])
             left += 1
         
